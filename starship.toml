@@ -17,7 +17,7 @@ add_newline         = false
 
 format              = """
 [  ┌──](#ff7f7f) $username [─](#ff7f7f) $hostname [─](#ff7f7f) $localip$fill[────>](#ff7f7f)
-[  │](#ff7f7f) $directory$fill ($python) ($nodejs) ($lua) ($git_status$git_branch$git_commit$git_state)[────>](#ff7f7f)
+[  │](#ff7f7f) $directory$fill ($python) ($nodejs) ($lua) ($git_status$git_branch$git_commit$git_state) [────>](#ff7f7f)
 [  └─](#ff7f7f)$character
 """
 
