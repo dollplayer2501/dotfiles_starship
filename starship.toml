@@ -1,0 +1,164 @@
+#
+#
+#
+
+add_newline         = false
+
+
+#
+# Left format
+#
+
+# format              = """
+# [  ┌── ](#ff7f7f)$username[─](#ff7f7f)$hostname[─](#ff7f7f)$localip[ ─](#ff7f7f)$fill[─](#ff7f7f)($python)[─](#ff7f7f)($nodejs)[─](#ff7f7f)($lua)[─](#ff7f7f)($git_status$git_branch$git_commit$git_state)[─>](#ff7f7f)
+# [  │](#ff7f7f) $directory
+# [  └─](#ff7f7f)$character
+# """
+
+format              = """
+[  ┌──](#ff7f7f) $username [─](#ff7f7f) $hostname [─](#ff7f7f) $localip$fill[────>](#ff7f7f)
+[  │](#ff7f7f) $directory$fill ($python) ($nodejs) ($lua) ($git_status$git_branch$git_commit$git_state)[────>](#ff7f7f)
+[  └─](#ff7f7f)$character
+"""
+
+right_format = "[────>](#ff7f7f)"
+
+
+#
+# Left format: First line
+#
+
+[username]
+format              = '[$user]($style)'
+style_user          = '#7f3fbf'
+style_root          = '#cc3980'
+disabled            = false
+show_always         = true
+
+[hostname]
+format              = '[$ssh_symbol](#7f3fbf)[$hostname](#7f3fbf)'
+ssh_only            = false
+trim_at             = '.companyname.com'
+disabled            = false
+
+[localip]
+ssh_only            = false
+format              = '[$localipv4]($style)'
+style               = '#7f3fbf'
+disabled            = false
+
+# It does not work?
+# [tty]
+# format = "[$tty]($style) "
+# style = "yellow"
+
+[time]
+time_format         = '%a %b %-d %Y %H:%M'
+format              = '[$time]($style)'
+style               = '#7f3fbf'
+disabled            = false
+use_12hr            = false
+
+[memory_usage]
+threshold           = -1
+format              = '[Ram:${ram_pct}]($style) [Swap:${swap_pct}]($style)'
+symbol              = ''
+style               = '#7f3fbf'
+disabled            = false
+
+
+#
+# Left format: Second line
+#
+
+[directory]
+format              = '[$read_only]($read_only_style)[$path]($style)'
+read_only           = 'read-only: ' # '🔒'
+read_only_style     = 'bold #cc3980'
+style               = '#7fbaff'
+truncation_length   = 0
+truncate_to_repo    = false
+#home_symbol         = '~' # /home/dollplayer'
+home_symbol         = '/home/dollplayer'
+
+
+#
+# Left format: Third line
+#
+
+[character]
+success_symbol      = '[>>>](#ff7f7f)'
+error_symbol        = '[>>>>>>](bold #cc3980)'
+# The format string used before the text input if the shell is in vim normal mode.
+  vimcmd_symbol = '[<<<](red)'
+# The format string used before the text input if the shell is in vim replace_one mode.
+  vimcmd_replace_one_symbol = '[<<<](#7f3fbf)'
+# The format string used before the text input if the shell is in vim replace mode.
+  vimcmd_replace_symbol = '[<<<](#9999cc)'
+# The format string used before the text input if the shell is in vim replace mode.
+  vimcmd_visual_symbol = '[<<<](#9999cc)'
+
+
+### Right
+
+[vagrant]
+format              = '[Vagrant ${version}]($style)'
+style               = '#7f3fbf'
+
+[python]
+format              = '[Python ${pyenv_prefix}(${version})(\($virtualenv\))]($style)'
+style               = '#7f3fbf'
+
+[nodejs]
+format              = '[Node ${version}]($style)'
+style               = '#7f3fbf'
+
+[lua]
+format              = '[Lua ${version}]($style)'
+style               = '#7f3fbf'
+
+[git_branch]
+format              = '[$symbol$branch(:$remote_branch)]($style)'
+style               = '#7fbaff'
+
+[git_commit]
+style               = '#7fbaff'
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style)'
+style               = '#7fbaff'
+
+[git_status]
+format              = '([\[$all_status$ahead_behind\]]($style))'
+conflicted          = '='
+ahead               = '⇡'
+behind              = '⇣'
+diverged            = '⇕'
+up_to_date          = 'u'
+untracked           = '?'
+stashed             = '$'
+modified            = '!'
+staged              = '+'
+renamed             = '»'
+deleted             = '✘'
+typechanged         = 't'
+style               = '#7fbaff'
+
+
+[fill]
+symbol              = ' '
+style               = '#ff7f7f'
+
+[custom.which_tty_term]
+command = "which_tty_term" 
+when = "true"
+format = '[$output]($style)'
+# format = "[$output](bold green)"
+
+
+
+
+##
+
+
+
