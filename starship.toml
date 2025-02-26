@@ -1,5 +1,5 @@
 #
-#
+# TODO: display tty and terminal name from fish function
 #
 
 add_newline         = false
@@ -8,25 +8,34 @@ add_newline         = false
 #
 # Left format
 #
-
-# format              = """
-# [  ┌── ](#ff7f7f)$username[─](#ff7f7f)$hostname[─](#ff7f7f)$localip[ ─](#ff7f7f)$fill[─](#ff7f7f)($python)[─](#ff7f7f)($nodejs)[─](#ff7f7f)($lua)[─](#ff7f7f)($git_status$git_branch$git_commit$git_state)[─>](#ff7f7f)
-# [  │](#ff7f7f) $directory
-# [  └─](#ff7f7f)$character
-# """
-
 format              = """
-[  ┌──](#ff7f7f) $username [─](#ff7f7f) $hostname [─](#ff7f7f) $localip$fill[────>](#ff7f7f)
-[  │](#ff7f7f) $directory$fill ($python) ($nodejs) ($lua) ($git_status$git_branch$git_commit$git_state) [────>](#ff7f7f)
+[──┬─](#ff7f7f) $hostname[,](#7f3fbf) $username $fill $time [───>](#ff7f7f)
+[  ├─](#ff7f7f) $directory  $git_status$git_branch$git_commit$git_state$git_metrics $fill $memory_usage [───>](#ff7f7f)
 [  └─](#ff7f7f)$character
 """
 
-right_format = "[────>](#ff7f7f)"
+#
+# Right format
+#
+right_format = "$python$nodejs$lua [───>](#ff7f7f)"
 
 
 #
-# Left format: First line
 #
+#
+
+[fill]
+symbol              = ' '
+style               = '#ff7f7f'
+
+#
+#
+#
+
+[hostname]
+format              = '[$ssh_symbol](#7f3fbf)[$hostname](#7f3fbf)'
+ssh_only            = false
+trim_at             = '.companyname.com'
 
 [username]
 format              = '[$user]($style)'
@@ -35,25 +44,8 @@ style_root          = '#cc3980'
 disabled            = false
 show_always         = true
 
-[hostname]
-format              = '[$ssh_symbol](#7f3fbf)[$hostname](#7f3fbf)'
-ssh_only            = false
-trim_at             = '.companyname.com'
-disabled            = false
-
-[localip]
-ssh_only            = false
-format              = '[$localipv4]($style)'
-style               = '#7f3fbf'
-disabled            = false
-
-# It does not work?
-# [tty]
-# format = "[$tty]($style) "
-# style = "yellow"
-
 [time]
-time_format         = '%a %b %-d %Y %H:%M'
+time_format         = '%a, %b %-d %Y, %H:%M:%S'
 format              = '[$time]($style)'
 style               = '#7f3fbf'
 disabled            = false
@@ -66,11 +58,6 @@ symbol              = ''
 style               = '#7f3fbf'
 disabled            = false
 
-
-#
-# Left format: Second line
-#
-
 [directory]
 format              = '[$read_only]($read_only_style)[$path]($style)'
 read_only           = 'read-only: ' # '🔒'
@@ -78,13 +65,7 @@ read_only_style     = 'bold #cc3980'
 style               = '#7fbaff'
 truncation_length   = 0
 truncate_to_repo    = false
-#home_symbol         = '~' # /home/dollplayer'
 home_symbol         = '/home/dollplayer'
-
-
-#
-# Left format: Third line
-#
 
 [character]
 success_symbol      = '[>>>](#ff7f7f)'
@@ -99,42 +80,34 @@ error_symbol        = '[>>>>>>](bold #cc3980)'
   vimcmd_visual_symbol = '[<<<](#9999cc)'
 
 
-### Right
-
-[vagrant]
-format              = '[Vagrant ${version}]($style)'
-style               = '#7f3fbf'
+#
+#
+#
 
 [python]
-format              = '[Python ${pyenv_prefix}(${version})(\($virtualenv\))]($style)'
+format              = '( [Python ${pyenv_prefix}(${version})(\($virtualenv\))]($style))'
 style               = '#7f3fbf'
 
 [nodejs]
-format              = '[Node ${version}]($style)'
+format              = '( [Node ${version}]($style))'
 style               = '#7f3fbf'
 
 [lua]
-format              = '[Lua ${version}]($style)'
+format              = '( [Lua ${version}]($style))'
 style               = '#7f3fbf'
 
-[git_branch]
-format              = '[$symbol$branch(:$remote_branch)]($style)'
-style               = '#7fbaff'
 
-[git_commit]
-style               = '#7fbaff'
-
-[git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style)'
-style               = '#7fbaff'
+#
+#
+#
 
 [git_status]
-format              = '([\[$all_status$ahead_behind\]]($style))'
+format              = '([\[$all_status$ahead_behind\]]($style) )'
 conflicted          = '='
 ahead               = '⇡'
 behind              = '⇣'
 diverged            = '⇕'
-up_to_date          = 'u'
+up_to_date          = '✓'
 untracked           = '?'
 stashed             = '$'
 modified            = '!'
@@ -142,23 +115,29 @@ staged              = '+'
 renamed             = '»'
 deleted             = '✘'
 typechanged         = 't'
-style               = '#7fbaff'
+style               = '#7f3fbf'
 
+[git_branch]
+format              = '([$symbol$branch(:$remote_branch)]($style) )'
+symbol              = ''
+style               = '#7f3fbf'
 
-[fill]
-symbol              = ' '
-style               = '#ff7f7f'
+[git_commit]
+format              = '([\($hash$tag\)]($style) )'
+style               = '#7f3fbf'
 
-[custom.which_tty_term]
-command = "which_tty_term" 
-when = "true"
-format = '[$output]($style)'
-# format = "[$output](bold green)"
+[git_state]
+format              = '([\($state( $progress_current of $progress_total)\)]($style) )'
+style               = '#7f3fbf'
 
-
+[git_metrics]
+format              = '([+$added]($added_style)[/](#7f3fbf)[-$deleted]($deleted_style) )'
+added_style         = '#7f3fbf'
+deleted_style       = '#7f3fbf'
+only_nonzero_diffs  = true
+ignore_submodules   = true
+disabled            = false
 
 
 ##
-
-
 
