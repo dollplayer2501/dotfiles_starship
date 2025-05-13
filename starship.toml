@@ -34,7 +34,8 @@ style               = '#ff7f7f'
 
 [hostname]
 format              = '[$ssh_symbol](#7f3fbf)[$hostname](#7f3fbf)'
-ssh_only            = false
+ssh_only            = true
+ssh_symbol          = 'SSH'
 trim_at             = '.companyname.com'
 
 [username]
