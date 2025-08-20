@@ -34,7 +34,7 @@ style               = '#ff7f7f'
 
 [hostname]
 format              = '[$ssh_symbol](#7f3fbf)[$hostname](#7f3fbf)'
-ssh_only            = true
+ssh_only            = false
 ssh_symbol          = 'SSH'
 trim_at             = '.companyname.com'
 
@@ -86,15 +86,15 @@ error_symbol        = '[>>>>>>](bold #cc3980)'
 #
 
 [python]
-format              = '( [Python ${pyenv_prefix}(${version})(\($virtualenv\))]($style))'
+format              = '([Python ${pyenv_prefix}(${version})( \($virtualenv\))]($style))'
 style               = '#7f3fbf'
 
 [nodejs]
-format              = '( [Node ${version}]($style))'
+format              = '([Node ${version}]($style))'
 style               = '#7f3fbf'
 
 [lua]
-format              = '( [Lua ${version}]($style))'
+format              = '([Lua ${version}]($style))'
 style               = '#7f3fbf'
 
 
