@@ -8,11 +8,13 @@ add_newline         = false
 #
 # Left format
 #
+#  Check `starship explain`
 format              = """
 [──┬─](#ff7f7f) $hostname[,](#7f3fbf) $username $fill $time [───>](#ff7f7f)
 [  ├─](#ff7f7f) $directory  $git_status$git_branch$git_commit$git_state$git_metrics $fill $memory_usage [───>](#ff7f7f)
-[  └─](#ff7f7f)$character
+[  └─](#ff7f7f)$character ${custom.ranger}
 """
+# format="$directory ${custom.ranger} $character"
 
 #
 # Right format
@@ -138,6 +140,13 @@ deleted_style       = '#7f3fbf'
 only_nonzero_diffs  = true
 ignore_submodules   = true
 disabled            = false
+
+
+[custom.ranger]
+shell               = ['fish']
+command             = "echo $STARSHIP_SHELL_INDICATOR"
+when                = true
+style               = 'bold #ff7f7f'
 
 
 ##
